@@ -21,9 +21,9 @@ use yii\web\View;
                                         $observacao .= 'Nenhuma observação.';
                                     }
                             ?>
-                            <button type="button" class="btn btn-danger" data-toggle="popover" title="Reservante: <?= Html::encode($reservante) ?>" data-content="<?= nl2br(Html::encode($observacao)) ?>"><?= $hora ?>:00</button>
+                            <button type="button" class="btn btn-danger" data-toggle="popover" title="Reservante: <?= Html::encode($reservante) ?>" data-content="<?= nl2br(Html::encode($observacao)) ?>"><?= $hora ?>h</button>
                         <?php else: ?>
-                            <button type="button" class="btn btn-success"><?= $hora ?>:00</button>
+                            <button type="button" class="btn btn-success"><?= $hora ?>h</button>
                         <?php endif; ?>
                     </div>
                 <?php endfor; ?>
