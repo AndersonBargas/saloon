@@ -1,3 +1,7 @@
+<?php
+use yii\helpers\Html;
+use yii\web\View;
+?>
 <?php foreach ($salas as $id => $sala): ?>
     <?php $horariosDaSala =  $sala
         ->getReservas()
@@ -7,7 +11,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">Sala <?= $sala->nome ?><span class="label label-info pull-right">Reservas: <?= count($horariosDaSala) ?></span></div>
         <div class="panel-body">
-            <div class="btn-group btn-group-justified" role="group" aria-label="..."-->
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <?php for ($hora = 8; $hora <= 18; $hora++) : ?>
                     <div class="btn-group" role="group">
                         <?php if (array_key_exists($hora, $horariosDaSala)): ?>
@@ -17,11 +21,10 @@
                                         $observacao .= 'Nenhuma observação.';
                                     }
                             ?>
-                            <button type="button" class="btn btn-danger" data-toggle="popover" title="Reservante: <?= $reservante ?>" data-content="<?= $observacao ?>"><?= $hora ?>:00</button>
+                            <button type="button" class="btn btn-danger" data-toggle="popover" title="Reservante: <?= Html::encode($reservante) ?>" data-content="<?= nl2br(Html::encode($observacao)) ?>"><?= $hora ?>:00</button>
                         <?php else: ?>
                             <button type="button" class="btn btn-success"><?= $hora ?>:00</button>
                         <?php endif; ?>
-                        
                     </div>
                 <?php endfor; ?>
             </div>
@@ -30,5 +33,5 @@
 <?php endforeach; ?>
 <?php
     $this->registerCss('div.popover { width: 400px; }');
-    $this->registerJs('$(\'[data-toggle="popover"]\').popover()', \yii\web\View::POS_READY);
+    $this->registerJs('$(\'[data-toggle="popover"]\').popover()', View::POS_READY);
 ?>
