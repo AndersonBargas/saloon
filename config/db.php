@@ -6,6 +6,9 @@ return [
     'username' => getenv('DB_USERNAME'),
     'password' => getenv('DB_PASSWORD'),
     'charset' => 'utf8',
+    'on afterOpen' => function($event) { 
+        $event->sender->createCommand("SET time_zone='-03:00';")->execute(); 
+    },
 
     // Schema cache options (for production environment)
     //'enableSchemaCache' => true,
