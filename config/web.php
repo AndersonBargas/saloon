@@ -55,10 +55,10 @@ $config = [
                 'salas'     => 'salas/index',
                 'usuarios'  => 'usuarios/index',
 
-                'historico/<id:\d+>' => 'historico/visualizar',
-                'reservas/<id:\d+>'  => 'reservas/visualizar',
-                'salas/<id:\d+>'     => 'salas/visualizar',
-                'usuarios/<id:\d+>'  => 'usuarios/visualizar',
+                'historico/<id:\d+>' => 'historico/ver',
+                'reservas/<id:\d+>'  => 'reservas/ver',
+                'salas/<id:\d+>'     => 'salas/ver',
+                'usuarios/<id:\d+>'  => 'usuarios/ver',
 
                 'historico/<action:(.*)>/<id:\d+>' => 'historico/<action>',
                 'reservas/<action:(.*)>/<id:\d+>'  => 'reservas/<action>',

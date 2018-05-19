@@ -16,7 +16,7 @@ $this->title = 'Usuários';
     <?php Pjax::begin(); ?>
 
     <p>
-        <?= Html::a('Novo Usuário', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Novo Usuário', ['adicionar'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -36,11 +36,11 @@ $this->title = 'Usuários';
                 'template' => '{usuarioEditar} {usuarioExcluir}',
                 'buttons'  => [
                                 'usuarioEditar' => function ($url, $model) {
-                                    $url = Url::to(['usuarios/update', 'id' => $model->id]);
+                                    $url = Url::to(['usuarios/editar', 'id' => $model->id]);
                                     return Html::a('<span class="fa fa-pencil"></span>', $url, ['title' => 'Editar']);
                                 },
                                 'usuarioExcluir' => function ($url, $model) {
-                                    $url = Url::to(['usuarios/delete', 'id' => $model->id]);
+                                    $url = Url::to(['usuarios/excluir', 'id' => $model->id]);
                                     return Html::a('<span class="fa fa-trash"></span>', $url, [
                                         'title'        => 'Excluir',
                                         'data-confirm' => 'Tem certeza que deseja excluir este usuário?',

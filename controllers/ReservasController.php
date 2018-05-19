@@ -50,7 +50,7 @@ class ReservasController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionVer($id)
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -62,7 +62,7 @@ class ReservasController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionAdicionar()
     {
         $model = new Reservas();
 
@@ -82,7 +82,7 @@ class ReservasController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionEditar($id)
     {
         $model = $this->findModel($id);
 
@@ -102,7 +102,7 @@ class ReservasController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionExcluir($id)
     {
         $this->findModel($id)->delete();
 
