@@ -21,8 +21,10 @@ $this->title = 'Reservas';
         <?= Html::a('Nova Reserva', ['adicionar'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= Reservas::widget(
+    <?= Reservas::widget() ?>
 
-    ) ?>
+    <p>
+        <?= Html::a('<i class="fa fa-plus"></i> Nova Sala', ['salas/adicionar'], ['class' => 'btn btn-primary btn-lg btn-block']) ?>
+    </p>
 
 </div>
