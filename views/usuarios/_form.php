@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
@@ -18,12 +19,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'senha')->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'administrador')->checkbox() ?>
+    <?= $form->field($model, 'administrador')->checkbox(['class'=>'js-switch']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
 
 </div>
+<?php
+    $this->registerJs('var elem = document.querySelector(\'.js-switch\');
+    var init = new Switchery(elem);', View::POS_READY);
+?>

@@ -33,15 +33,19 @@ $this->title = 'Usuários';
 
             [
                 'class'    => 'yii\grid\ActionColumn',
-                'template' => '{usuarioEditar} {usuarioExcluir}',
+                'template' => '{usuarioVer} {usuarioEditar} {usuarioExcluir}',
                 'buttons'  => [
+                                'usuarioVer' => function ($url, $model) {
+                                    $url = Url::to(['usuarios/ver', 'id' => $model->id]);
+                                    return Html::a('<span class="fa fa-eye"></span>', $url, ['title' => 'Visualizar']);
+                                },
                                 'usuarioEditar' => function ($url, $model) {
                                     $url = Url::to(['usuarios/editar', 'id' => $model->id]);
-                                    return Html::a('<span class="fa fa-pencil"></span>', $url, ['title' => 'Editar']);
+                                    return Html::a('<span class="fa fa-pencil-alt"></span>', $url, ['title' => 'Editar']);
                                 },
                                 'usuarioExcluir' => function ($url, $model) {
                                     $url = Url::to(['usuarios/excluir', 'id' => $model->id]);
-                                    return Html::a('<span class="fa fa-trash"></span>', $url, [
+                                    return Html::a('<span class="fa fa-trash-alt"></span>', $url, [
                                         'title'        => 'Excluir',
                                         'data-confirm' => 'Tem certeza que deseja excluir este usuário?',
                                         'data-method'  => 'post',

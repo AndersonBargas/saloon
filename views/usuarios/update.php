@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 
-$this->title = 'Update Usuarios: ' . $model->id;
+$this->title = Html::encode($model->nome . ' (#' . $model->id .  ')');
 ?>
 <div class="usuarios-update">
 
