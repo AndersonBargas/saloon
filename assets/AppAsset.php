@@ -22,8 +22,10 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/fontawesome-all.css',
+        'css/switchery.css',
     ];
     public $js = [
+        'js/switchery.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
