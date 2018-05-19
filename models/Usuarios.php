@@ -13,8 +13,7 @@ use yii\db\Expression;
  * @property string $email
  * @property string $senha
  * @property bool $administrador
- * @property string $dataCriacao
- * @property string $dataExclusao
+ * @property string $criacao
  *
  * @property Historico[] $historicos
  * @property Reservas[] $reservas
@@ -37,7 +36,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         return [
             [['nome', 'email', 'senha'], 'required'],
             [['administrador'], 'boolean'],
-            [['dataCriacao', 'dataExclusao'], 'safe'],
+            [['criacao'], 'safe'],
             [['nome', 'email', 'senha'], 'string', 'max' => 120],
             [['email'], 'unique'],
         ];
@@ -54,8 +53,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
             'email' => 'E-mail',
             'senha' => 'Senha',
             'administrador' => 'Administrador',
-            'dataCriacao' => 'Data Criacao',
-            'dataExclusao' => 'Data Exclusao',
+            'criacao' => 'Data Criação',
         ];
     }
 

@@ -28,9 +28,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'administrador')->checkbox() ?>
 
-    <?php // echo $form->field($model, 'dataCriacao') ?>
-
-    <?php // echo $form->field($model, 'dataExclusao') ?>
+    <?php // echo $form->field($model, 'criacao') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

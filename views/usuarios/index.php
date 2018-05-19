@@ -31,8 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'email:email',
             'senha',
             'administrador:boolean',
-            //'dataCriacao',
-            //'dataExclusao',
+            //'criacao',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

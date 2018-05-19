@@ -20,9 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'administrador')->checkbox() ?>
 
-    <?= $form->field($model, 'dataCriacao')->textInput() ?>
-
-    <?= $form->field($model, 'dataExclusao')->textInput() ?>
+    <?= $form->field($model, 'criacao')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
