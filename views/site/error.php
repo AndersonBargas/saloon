@@ -13,15 +13,16 @@ $this->title = $name;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+    <p>
+        <?= Html::encode('O erro informado abaixo ocorreu enquanto o Servidor Web processava a sua requisição:') ?>
+    </p>
+
     <div class="alert alert-danger">
         <?= nl2br(Html::encode($message)) ?>
     </div>
-
+    
     <p>
-        The above error occurred while the Web server was processing your request.
-    </p>
-    <p>
-        Please contact us if you think this is a server error. Thank you.
+        <?= Html::encode('Por favor, caso ache que este erro não deveria estar acontecendo, contate-me em: anderson <at> andersonbargas <dot> com. Obrigado.') ?>
     </p>
 
 </div>
