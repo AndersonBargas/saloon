@@ -26,6 +26,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'js/switchery.js',
+        'js/bootbox.min.js',
         'js/site.js',
     ];
     public $depends = [
