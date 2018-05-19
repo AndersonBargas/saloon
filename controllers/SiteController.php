@@ -80,7 +80,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             if( $model->login() ){
                 Historico::gerarHistorico('Usuário se logou no sistema.', false);
-                return $this->goHome();
+                return $this->redirect(['reservas/index']);
             }else{
                 Yii::$app->getSession()->setFlash('erro','E-mail ou senha incorreto(s).');
             }
