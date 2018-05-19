@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 use yii\db\Expression;
 
 /**
@@ -18,7 +20,7 @@ use yii\db\Expression;
  * @property Historico[] $historicos
  * @property Reservas[] $reservas
  */
-class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
+class Usuarios extends ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -57,6 +59,19 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['criacao'],
+                ],
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
     /**
      * Função para fazermos o hook no evento de inserção
      * e criarmos a hash da senha.
@@ -69,9 +84,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         if (parent::beforeSave($insert)) {
             if (isset($this->senha) && !empty($this->senha)){
                 $this->senha = Yii::$app->getSecurity()->generatePasswordHash($this->senha);
-            }
-            if ($this->isNewRecord){
-                $this->criacao = new Expression('NOW()');
             }
             return true;
         }
