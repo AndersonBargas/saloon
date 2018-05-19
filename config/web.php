@@ -50,7 +50,12 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
-                '<action:(.*)>' => 'site/<action>',
+                'historico'          => 'historico/index',
+                'reservas'           => 'reservas/index',
+                'salas'              => 'salas/index',
+                'usuarios'           => 'usuarios/index',
+
+                '<controller:(.*)/<action:(.*)>' => '<controller>/<action>',
             ],
         ],
     ],
