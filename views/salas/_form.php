@@ -16,12 +16,12 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'lotacao')->textInput() ?>
 
-    <?= $form->field($model, 'projetor')->checkbox() ?>
+    <?= $form->field($model, 'projetor')->checkbox(['class'=>'js-switch']) ?>
 
-    <?= $form->field($model, 'som')->checkbox() ?>
+    <?= $form->field($model, 'som')->checkbox(['class'=>'js-switch']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
