@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+    <div class="alert alert-info" role="alert">No primeiro acesso, utilize: <strong>admin@admin.com</strong> / <strong>admin</strong></div>
 
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'senha')->passwordInput() ?>
 
         <?= $form->field($model, 'lembrar')->checkbox([
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} Manter-me logado</div>\n<div class=\"col-lg-8\">{error}</div>",
+            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
         ]) ?>
 
         <?php if (Yii::$app->session->hasFlash('erro')): ?>
@@ -39,16 +39,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php endif; ?>
 
         <div class="form-group">
-            <div class="col-lg-offset-1 col-lg-11">
+            <div class="col-lg-offset-1 col-lg-3">
                 <?= Html::submitButton('<span class="btn-block-text">Entrar</span>', ['class' => 'btn  btn-primary btn-block', 'name' => 'login-button']) ?>
             </div>
         </div>
 
         <div class="clearfix"></div>
 
-    <div class="separator">
-        <p>No primeiro acesso, utilize: <strong>admin@admin.com</strong> / <strong>admin</strong></p>
-    </div>
+        
 
     <?php ActiveForm::end(); ?>
 
