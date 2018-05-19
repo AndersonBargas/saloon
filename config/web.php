@@ -47,13 +47,23 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
-                'login'              => 'site/login',
-                'logout'             => 'site/logout',
+                'login'  => 'site/login',
+                'logout' => 'site/logout',
 
-                'historico'          => 'historico/index',
-                'reservas'           => 'reservas/index',
-                'salas'              => 'salas/index',
-                'usuarios'           => 'usuarios/index',
+                'historico' => 'historico/index',
+                'reservas'  => 'reservas/index',
+                'salas'     => 'salas/index',
+                'usuarios'  => 'usuarios/index',
+
+                'historico/<id:\d+>' => 'historico/visualizar',
+                'reservas/<id:\d+>'  => 'reservas/visualizar',
+                'salas/<id:\d+>'     => 'salas/visualizar',
+                'usuarios/<id:\d+>'  => 'usuarios/visualizar',
+
+                'historico/<action:(.*)>/<id:\d+>' => 'historico/<action>',
+                'reservas/<action:(.*)>/<id:\d+>'  => 'reservas/<action>',
+                'salas/<action:(.*)>/<id:\d+>'     => 'salas/<action>',
+                'usuarios/<action:(.*)>/<id:\d+>' => 'usuarios/<action>',
 
                 '<controller:(.*)/<action:(.*)>' => '<controller>/<action>',
             ],
