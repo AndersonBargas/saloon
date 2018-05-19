@@ -71,7 +71,7 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
                 $this->senha = Yii::$app->getSecurity()->generatePasswordHash($this->senha);
             }
             if ($this->isNewRecord){
-                $this->dataCriacao = new Expression('NOW()');
+                $this->criacao = new Expression('NOW()');
             }
             return true;
         }
