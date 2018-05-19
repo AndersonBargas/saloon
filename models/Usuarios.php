@@ -138,6 +138,16 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     }
 
     /**
+     * Retorna o primeiro nome do usuário logado
+     * 
+     * @return string
+     */
+    public function getPrimeiroNome()
+    {
+        return explode(' ', $this->nome)[0];
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getReservas()
