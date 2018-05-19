@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "usuarios".
@@ -56,6 +57,27 @@ class Usuarios extends \yii\db\ActiveRecord
             'dataCriacao' => 'Data Criacao',
             'dataExclusao' => 'Data Exclusao',
         ];
+    }
+
+    /**
+     * Função para fazermos o hook no evento de inserção
+     * e criarmos a hash da senha.
+     * 
+     * @param boolean
+     * @return boolean
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            if (isset($this->senha) && !empty($this->senha)){
+                $this->senha = Yii::$app->getSecurity()->generatePasswordHash($this->senha);
+            }
+            if ($this->isNewRecord){
+                $this->dataCriacao = new Expression('NOW()');
+            }
+            return true;
+        }
+        return false;
     }
 
     /**
