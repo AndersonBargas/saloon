@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Historico;
 
 class SiteController extends Controller
 {
@@ -77,10 +78,15 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            if( $model->login() ){
+                Historico::gerarHistorico('Usuário se logou no sistema.', false);
+                return $this->goHome();
+            }else{
+                Yii::$app->getSession()->setFlash('erro','E-mail ou senha incorreto(s).');
+            }
         }
 
-        $model->password = '';
+        $model->senha = '';
         return $this->render('login', [
             'model' => $model,
         ]);

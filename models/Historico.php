@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use \yii\db\Expression;
 
 /**
  * This is the model class for table "historico".
@@ -64,6 +65,37 @@ class Historico extends \yii\db\ActiveRecord
             'url' => 'Url',
             'detalhes' => 'Detalhes',
         ];
+    }
+
+    /**
+     * Salva coisas no histórico.
+     *
+     * @return null
+     */
+    public static function gerarHistorico($comentario = '', $salvaDetalhes = true)
+    {
+        if (Yii::$app->user->isGuest) {
+            return null;
+        }
+        $h = new self();
+        $h->idUsuario     = Yii::$app->user->getId();
+        $h->dataHistorico = new Expression('NOW()');
+        $h->ip            = Yii::$app->request->getUserIP();
+        $h->host          = gethostbyaddr($h->ip);
+        $h->navegador     = Yii::$app->request->getUserAgent();
+        $h->comentario    = $comentario;
+        $h->url           = Yii::$app->request->absoluteUrl;
+        $post             = Yii::$app->request->post();
+        if($salvaDetalhes){
+            if (Yii::$app->request->isPost) {
+                if(Yii::$app->request->isAjax){
+                    $h->detalhes = $post;
+                }else{
+                    $h->detalhes = json_encode($post);
+                }
+            }    
+        }
+        $h->save(false);
     }
 
     /**

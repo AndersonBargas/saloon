@@ -19,7 +19,7 @@ use yii\db\Expression;
  * @property Historico[] $historicos
  * @property Reservas[] $reservas
  */
-class Usuarios extends \yii\db\ActiveRecord
+class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * {@inheritdoc}
@@ -51,7 +51,7 @@ class Usuarios extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'email' => 'Email',
+            'email' => 'E-mail',
             'senha' => 'Senha',
             'administrador' => 'Administrador',
             'dataCriacao' => 'Data Criacao',
@@ -81,6 +81,47 @@ class Usuarios extends \yii\db\ActiveRecord
     }
 
     /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByUsername($email)
+    {
+        return static::findOne(['email' => $email]);
+    }
+
+    /**
+     * Localiza uma identidade pelo ID informado
+     *
+     * @param string|int $id o ID a ser localizado
+     * @return IdentityInterface|null o objeto da identidade que corresponde ao ID informado
+     */
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    /**
+     * Localiza uma identidade pela chave informada
+     *
+     * @param string $chave a chave a ser localizada
+     * @return IdentityInterface|null o objeto da identidade que corresponde a chave informada
+     */
+    public static function findIdentityByAccessToken($token, $type = NULL)
+    {
+        return false;
+    }
+
+    /**
+     * @return string a chave de autenticação do usuário atual
+     */
+    public function getAuthKey()
+    {
+        return false;
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getHistoricos()
@@ -89,10 +130,38 @@ class Usuarios extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return int|string o ID do usuário atual
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getReservas()
     {
         return $this->hasMany(Reservas::className(), ['usuario' => 'id']);
+    }
+
+    /**
+     * @param string $chave
+     * @return bool se a chave de autenticação do usuário atual for válida
+     */
+    public function validateAuthKey($chave)
+    {
+        return false;
+    }
+
+    /**
+     * Valida a senha
+     *
+     * @param string $password senha a ser validada
+     * @return bool se a senha está correta
+     */
+    public function validatePassword($senha)
+    {
+        return $this->senha === $senha;
     }
 }
