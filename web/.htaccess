@@ -1,0 +1,8 @@
+# Utilize o mod_rewrite para suporte a URL amigavel
+RewriteEngine on
+
+# Se um diretorio ou arquivo existe, usa a requisicao diretamente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# Caso contrario, encaminha a requisicao para index.php
+RewriteRule . index.php
