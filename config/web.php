@@ -52,7 +52,6 @@ $config = [
 
                 'historico' => 'historico/index',
                 'reservas'  => 'reservas/index',
-                'salas'     => 'salas/index',
                 'usuarios'  => 'usuarios/index',
 
                 'historico/<id:\d+>' => 'historico/ver',
