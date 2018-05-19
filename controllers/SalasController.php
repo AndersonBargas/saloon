@@ -39,7 +39,8 @@ class SalasController extends Controller
         $model = new Salas();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->getSession()->setFlash('sucesso','Sala adicionada com sucesso.');
+            return $this->redirect(['reservas/index']);
         }
 
         return $this->render('create', [
@@ -59,7 +60,8 @@ class SalasController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::$app->getSession()->setFlash('sucesso','Sala adicionada com sucesso.');
+            return $this->redirect(['reservas/index']);
         }
 
         return $this->render('update', [
