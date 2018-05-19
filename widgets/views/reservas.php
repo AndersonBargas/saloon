@@ -9,7 +9,7 @@ use yii\web\View;
         ->indexBy('hora')
         ->All();?>
     <div class="panel panel-default">
-        <div class="panel-heading">Sala <?= $sala->nome ?><span class="label label-info pull-right">Reservas: <?= count($horariosDaSala) ?></span></div>
+        <div class="panel-heading"><?= Html::encode($sala->nome) ?><span class="label label-info pull-right">Reservas: <?= count($horariosDaSala) ?></span></div>
         <div class="panel-body">
             <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <?php for ($hora = 8; $hora <= 18; $hora++) : ?>
