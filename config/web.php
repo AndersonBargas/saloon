@@ -47,6 +47,9 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
+                'login'              => 'site/login',
+                'logout'             => 'site/logout',
+
                 'historico'          => 'historico/index',
                 'reservas'           => 'reservas/index',
                 'salas'              => 'salas/index',

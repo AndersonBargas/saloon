@@ -34,23 +34,22 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+    $itensMenu = [];
+    if (Yii::$app->user->isGuest) {
+        $itensMenu[] = ['label' => 'Home', 'url' => ['/site/index']];
+        $itensMenu[] = ['label' => 'Login', 'url' => ['/site/login']];
+    } else {
+        $itensMenu[] = ['label' => 'Reservas', 'url' => ['/reservas/index']];
+        if (Yii::$app->user->identity->administrador) {
+            $itensMenu[] = ['label' => 'Usuários', 'url' => ['/usuarios/index']];
+        }
+        $itensMenu[] = ['label' => 'Logout (' . Yii::$app->user->identity->getPrimeiroNome() . ')', 'url' => ['/site/logout']];
+    }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->getPrimeiroNome() . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
+        'items' => $itensMenu,
     ]);
     NavBar::end();
     ?>
