@@ -3,12 +3,14 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
+use app\widgets\Reservas;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ReservasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Reservas';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="reservas-index">
 
@@ -20,21 +22,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Reservas', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <?= Reservas::widget(
 
-            'id',
-            'usuario',
-            'sala',
-            'observacao:ntext',
-            'inicio',
-            //'termino',
+    ) ?>
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-    <?php Pjax::end(); ?>
 </div>

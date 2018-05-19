@@ -26,9 +26,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'observacao') ?>
 
-    <?= $form->field($model, 'inicio') ?>
+    <?= $form->field($model, 'data') ?>
 
-    <?php // echo $form->field($model, 'termino') ?>
+    <?php // echo $form->field($model, 'hora') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

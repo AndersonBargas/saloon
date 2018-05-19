@@ -32,8 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'usuario',
             'sala',
             'observacao:ntext',
-            'inicio',
-            'termino',
+            'data',
+            'hora',
         ],
     ]) ?>
 

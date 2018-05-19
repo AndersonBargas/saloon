@@ -18,8 +18,8 @@ class ReservasSearch extends Reservas
     public function rules()
     {
         return [
-            [['id', 'usuario', 'sala'], 'integer'],
-            [['observacao', 'inicio', 'termino'], 'safe'],
+            [['id', 'usuario', 'sala', 'hora'], 'integer'],
+            [['observacao', 'data'], 'safe'],
         ];
     }
 
@@ -62,8 +62,8 @@ class ReservasSearch extends Reservas
             'id' => $this->id,
             'usuario' => $this->usuario,
             'sala' => $this->sala,
-            'inicio' => $this->inicio,
-            'termino' => $this->termino,
+            'data' => $this->data,
+            'hora' => $this->hora,
         ]);
 
         $query->andFilterWhere(['like', 'observacao', $this->observacao]);
