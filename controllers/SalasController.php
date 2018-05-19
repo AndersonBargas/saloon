@@ -30,34 +30,6 @@ class SalasController extends Controller
     }
 
     /**
-     * Lists all Salas models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new SalasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single Salas model.
-     * @param string $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionVer($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new Salas model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
