@@ -45,13 +45,13 @@ use yii\web\View;
                                         }
                                 ?>
                                 <?php if (Yii::$app->user->identity->id == $reservante->id): ?>
-                                    <?= Html::a("{$hora}h", ['/reservas/ver', 'id' => $idReserva], ['class'=>'btn btn-warning']) ?>
+                                    <?= Html::a("{$hora}h", ['/reservas/ver', 'id' => $idReserva], ['class'=>'btn btn-warning', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Clique para visualizar sua reserva']) ?>
                                 <?php else: ?>
                                     <button type="button" class="btn btn-danger" data-toggle="popover" data-trigger="focus" title="Reservante: <?= Html::encode($reservante->nome) ?>" data-content="<?= nl2br(Html::encode($observacao)) ?>"><?= $hora ?>h</button>
                                 <?php endif; ?>
                                 
                             <?php else: ?>
-                                <?= Html::a("{$hora}h", ['/reservas/adicionar'], ['class'=>'btn btn-success', 'data-method' => 'POST', 'data-params'=>['sala' => $id, 'data' => $data, 'hora' => $hora,]]) ?>
+                                <?= Html::a("{$hora}h", ['/reservas/adicionar'], ['class'=>'btn btn-success', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => 'Clique para reservar este horário', 'data-method' => 'POST', 'data-params'=>['sala' => $id, 'data' => $data, 'hora' => $hora,]]) ?>
                             <?php endif; ?>
                         </div>
                     <?php endfor; ?>
@@ -61,5 +61,6 @@ use yii\web\View;
 <?php endforeach; ?>
 <?php
     $this->registerCss('div.popover { width: 400px; }');
+    $this->registerJs('$(\'[data-toggle="tooltip"]\').tooltip()', View::POS_READY);
     $this->registerJs('$(\'[data-toggle="popover"]\').popover()', View::POS_READY);
 ?>
