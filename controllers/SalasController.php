@@ -85,6 +85,8 @@ class SalasController extends Controller
     {
         $this->findModel($id)->delete();
 
+        Yii::$app->getSession()->setFlash('sucesso','Sala excluída com sucesso.');
+
         $session = Yii::$app->session;
         $data = $session->get('data');
         return $this->redirect(['reservas/index', 'data' => $data]);

@@ -67,6 +67,7 @@ class UsuariosController extends Controller
         $model = new Usuarios();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('sucesso','Usuário adicionado com sucesso.');
             return $this->redirect(['index']);
         }
 
@@ -88,6 +89,7 @@ class UsuariosController extends Controller
         $model->editando = true;
         
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('sucesso','Usuário atualizado com sucesso.');
             return $this->redirect(['index']);
         }
 
@@ -106,6 +108,8 @@ class UsuariosController extends Controller
      */
     public function actionExcluir($id)
     {
+        Yii::$app->getSession()->setFlash('sucesso','Usuário excluído com sucesso.');
+
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
