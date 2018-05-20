@@ -37,13 +37,19 @@ use yii\web\View;
                     <?php for ($hora = 8; $hora <= 18; $hora++) : ?>
                         <div class="btn-group" role="group">
                             <?php if (array_key_exists($hora, $horariosDaSala)): ?>
-                                <?php   $reservante = $horariosDaSala[$hora]->getUsuario0()->One()->nome;
+                                <?php   $idReserva = $horariosDaSala[$hora]->id;
+                                        $reservante = $horariosDaSala[$hora]->getUsuario0()->One();
                                         $observacao = $horariosDaSala[$hora]->observacao;
                                         if (empty($observacao)) {
                                             $observacao .= 'Nenhuma observação.';
                                         }
                                 ?>
-                                <button type="button" class="btn btn-danger" data-toggle="popover" title="Reservante: <?= Html::encode($reservante) ?>" data-content="<?= nl2br(Html::encode($observacao)) ?>"><?= $hora ?>h</button>
+                                <?php if (Yii::$app->user->identity->id == $reservante->id): ?>
+                                    <?= Html::a("{$hora}h", ['/reservas/ver', 'id' => $idReserva], ['class'=>'btn btn-warning']) ?>
+                                <?php else: ?>
+                                    <button type="button" class="btn btn-danger" data-toggle="popover" title="Reservante: <?= Html::encode($reservante->nome) ?>" data-content="<?= nl2br(Html::encode($observacao)) ?>"><?= $hora ?>h</button>
+                                <?php endif; ?>
+                                
                             <?php else: ?>
                                 <?= Html::a("{$hora}h", ['/reservas/adicionar'], ['class'=>'btn btn-success', 'data-method' => 'POST', 'data-params'=>['sala' => $id, 'data' => $data, 'hora' => $hora,]]) ?>
                             <?php endif; ?>
