@@ -21,7 +21,17 @@ $this->title = 'Reservas';
         </div>
     <?php endif; ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="row">
+        <div class='col-sm-6'>
+            <h1><?= Html::encode($this->title) ?></h1>
+        </div>
+        <div class='col-sm-6 text-center'>
+            <h3>Significado das cores:</h3>
+            <label class="btn btn-success">Livre</label>
+            <label class="btn btn-warning">Minha reserva</label>
+            <label class="btn btn-danger">Reserva de outra pessoa</label>
+        </div>
+    </div>
     <?php Pjax::begin(); ?>
 
     <h1 class="text-center"><a id="data_por_extenso" href="#" onclick="calendarioToggle(event)"></a></h1>
