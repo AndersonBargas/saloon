@@ -61,7 +61,9 @@ class SiteController extends Controller
         if (Yii::$app->user->isGuest) {
             return $this->render('index');    
         } else {
-            return $this->redirect(['reservas/index']);
+            $session = Yii::$app->session;
+            $data = $session->get('data');
+            return $this->redirect(['reservas/index', 'data' => $data]);
         }
     }
 
