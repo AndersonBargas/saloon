@@ -51,8 +51,13 @@ class ReservasController extends Controller
      */
     public function actionVer($id)
     {
+        $model = $this->findModel($id);
+        $model->usuario = $model->getUsuario0()->One()->nome;
+        $model->sala    = $model->getSala0()->One()->nome;
+        $model->hora .= 'h';
+    
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -94,7 +99,7 @@ class ReservasController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['ver', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -113,7 +118,9 @@ class ReservasController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        $session = Yii::$app->session;
+        $data = $session->get('data');
+        return $this->redirect(['reservas/index', 'data' => $data]);
     }
 
     /**

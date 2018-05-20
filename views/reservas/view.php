@@ -6,20 +6,18 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Reservas */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Reservas', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = Html::encode('Reserva (#' . $model->id .  ')');
 ?>
 <div class="reservas-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+        <?= Html::a('Editar', ['editar', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Excluir', ['excluir', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Tem certeza que deseja excluir esta reserva?',
                 'method' => 'post',
             ],
         ]) ?>
@@ -28,11 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'usuario',
             'sala',
             'observacao:ntext',
-            'data',
+            'data:date',
             'hora',
         ],
     ]) ?>
