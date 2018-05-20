@@ -48,6 +48,12 @@ $this->title = 'Reservas';
 
 </div>
 <?php
+    View::registerCss(
+        ".input-group-addon {
+            visibility: hidden;
+            padding: 0;
+        }"
+    );
     View::registerJs(
     "calendario = $('#datetimepicker2').datetimepicker({
         date    : '{$data}',
