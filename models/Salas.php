@@ -46,7 +46,7 @@ class Salas extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'lotacao' => 'Lotacao',
+            'lotacao' => 'Lotação',
             'projetor' => 'Projetor',
             'som' => 'Som',
         ];
