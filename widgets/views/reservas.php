@@ -47,7 +47,7 @@ use yii\web\View;
                                 <?php if (Yii::$app->user->identity->id == $reservante->id): ?>
                                     <?= Html::a("{$hora}h", ['/reservas/ver', 'id' => $idReserva], ['class'=>'btn btn-warning']) ?>
                                 <?php else: ?>
-                                    <button type="button" class="btn btn-danger" data-toggle="popover" title="Reservante: <?= Html::encode($reservante->nome) ?>" data-content="<?= nl2br(Html::encode($observacao)) ?>"><?= $hora ?>h</button>
+                                    <button type="button" class="btn btn-danger" data-toggle="popover" data-trigger="focus" title="Reservante: <?= Html::encode($reservante->nome) ?>" data-content="<?= nl2br(Html::encode($observacao)) ?>"><?= $hora ?>h</button>
                                 <?php endif; ?>
                                 
                             <?php else: ?>
