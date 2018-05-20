@@ -85,11 +85,13 @@ class UsuariosController extends Controller
     public function actionEditar($id)
     {
         $model = $this->findModel($id);
-
+        $model->editando = true;
+        
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
+        $model->senha = '';
         return $this->render('update', [
             'model' => $model,
         ]);

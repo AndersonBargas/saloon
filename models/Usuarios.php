@@ -22,6 +22,9 @@ use yii\db\Expression;
  */
 class Usuarios extends ActiveRecord implements \yii\web\IdentityInterface
 {
+
+    public $editando = false;
+
     /**
      * {@inheritdoc}
      */
@@ -35,13 +38,19 @@ class Usuarios extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function rules()
     {
-        return [
-            [['nome', 'email', 'senha'], 'required'],
-            [['administrador'], 'boolean'],
-            [['criacao'], 'safe'],
-            [['nome', 'email', 'senha'], 'string', 'max' => 120],
-            [['email'], 'unique'],
-        ];
+        $fields = [];
+        if ($this->editando) {
+            $fields[] = [['nome', 'email'], 'required'];
+        } else {
+            $fields[] = [['nome', 'email', 'senha'], 'required'];
+            $fields[] = [['senha'], 'string', 'min' => 4];
+        }
+        $fields[] = [['administrador'], 'boolean'];
+        $fields[] = [['criacao'], 'safe'];
+        $fields[] = [['nome', 'email', 'senha'], 'string', 'max' => 120];
+        $fields[] = [['email'], 'email'];
+        $fields[] = [['email'], 'unique'];
+        return $fields;
     }
 
     /**
@@ -81,6 +90,13 @@ class Usuarios extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function beforeSave($insert)
     {
+        if ($this->editando) {
+            if (empty($this->senha)) {
+                $backup = self::findIdentity($this->id);
+                $this->senha = $backup->senha;
+                return true;
+            }
+        }
         if (parent::beforeSave($insert)) {
             if (isset($this->senha) && !empty($this->senha)){
                 $this->senha = Yii::$app->getSecurity()->generatePasswordHash($this->senha);
