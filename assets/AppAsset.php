@@ -23,10 +23,13 @@ class AppAsset extends AssetBundle
         'css/site.css',
         'css/fontawesome-all.css',
         'css/switchery.css',
+        'css/bootstrap-datetimepicker.min.css',
     ];
     public $js = [
         'js/switchery.js',
         'js/bootbox.min.js',
+        'js/moment-with-locales.js',
+        'js/bootstrap-datetimepicker.min.js',
         'js/site.js',
     ];
     public $depends = [
