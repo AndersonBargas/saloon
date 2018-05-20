@@ -51,7 +51,6 @@ $config = [
                 'logout' => 'site/logout',
 
                 'historico' => 'historico/index',
-                'reservas'  => 'reservas/index',
                 'usuarios'  => 'usuarios/index',
 
                 'historico/<id:\d+>' => 'historico/ver',
@@ -64,6 +63,10 @@ $config = [
                 'usuarios/<action:(.*)>/<id:\d+>' => 'usuarios/<action>',
 
                 '<controller:(.*)/<action:(.*)>' => '<controller>/<action>',
+
+                [
+                    'class' => 'app\components\ReservasUrlRule',
+                ],
             ],
         ],
     ],
