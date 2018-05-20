@@ -6,7 +6,7 @@ use yii\web\View;
 <?php foreach ($salas as $id => $sala): ?>
     <?php $horariosDaSala =  $sala
         ->getReservas()
-        ->where(['data' => '2017-06-22'])
+        ->where(['data' => $data])
         ->indexBy('hora')
         ->All();?>
     <div class="panel panel-default">
