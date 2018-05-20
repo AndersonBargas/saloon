@@ -11,8 +11,8 @@ use Yii;
  * @property string $usuario
  * @property string $sala
  * @property string $observacao
- * @property string $inicio
- * @property string $termino
+ * @property string $data
+ * @property int $hora
  *
  * @property Salas $sala0
  * @property Usuarios $usuario0
@@ -33,10 +33,11 @@ class Reservas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['usuario', 'sala', 'observacao', 'inicio', 'termino'], 'required'],
-            [['usuario', 'sala'], 'integer'],
+            [['usuario', 'sala', 'observacao', 'data', 'hora'], 'required'],
+            [['usuario', 'sala', 'hora'], 'integer'],
             [['observacao'], 'string'],
-            [['inicio', 'termino'], 'safe'],
+            [['data'], 'safe'],
+            [['sala', 'data', 'hora'], 'unique', 'targetAttribute' => ['sala', 'data', 'hora']],
             [['sala'], 'exist', 'skipOnError' => true, 'targetClass' => Salas::className(), 'targetAttribute' => ['sala' => 'id']],
             [['usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario' => 'id']],
         ];
@@ -49,11 +50,11 @@ class Reservas extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'usuario' => 'Usuario',
+            'usuario' => 'Usuário',
             'sala' => 'Sala',
-            'observacao' => 'Observacao',
-            'inicio' => 'Inicio',
-            'termino' => 'Termino',
+            'observacao' => 'Observação',
+            'data' => 'Data',
+            'hora' => 'Hora',
         ];
     }
 

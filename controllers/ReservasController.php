@@ -22,7 +22,8 @@ class ReservasController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'adicionar' => ['POST'],
+                    'excluir' => ['POST'],
                 ],
             ],
         ];
@@ -64,9 +65,17 @@ class ReservasController extends Controller
     {
         $model = new Reservas();
 
+        $model->usuario = Yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            
+            $session = Yii::$app->session;
+            $data = $session->get('data');
+            return $this->redirect(['reservas/index', 'data' => $data]);
         }
+
+        $model->sala = Yii::$app->request->post('sala', null);
+        $model->data = Yii::$app->request->post('data', null);
+        $model->hora = Yii::$app->request->post('hora', null);
 
         return $this->render('create', [
             'model' => $model,
