@@ -17,7 +17,7 @@ $this->title = Html::encode($model->nome . ' (#' . $model->id .  ')');
         <?= Html::a('Excluir', ['excluir', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
+                'confirm' => 'Tem certeza que deseja excluir este usuário?',
                 'method' => 'post',
             ],
         ]) ?>
