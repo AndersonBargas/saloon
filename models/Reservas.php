@@ -37,7 +37,7 @@ class Reservas extends \yii\db\ActiveRecord
             [['usuario', 'sala', 'hora'], 'integer'],
             [['observacao'], 'string'],
             [['data'], 'safe'],
-            [['sala', 'data', 'hora'], 'unique', 'targetAttribute' => ['sala', 'data', 'hora']],
+            [['data', 'hora', 'usuario'], 'unique', 'targetAttribute' => ['data', 'hora', 'usuario'], 'message' => 'Você já possui uma reserva em outra sala para o mesmo dia e horário'],
             [['sala'], 'exist', 'skipOnError' => true, 'targetClass' => Salas::className(), 'targetAttribute' => ['sala' => 'id']],
             [['usuario'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['usuario' => 'id']],
         ];
