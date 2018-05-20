@@ -45,7 +45,7 @@ use yii\web\View;
                                 ?>
                                 <button type="button" class="btn btn-danger" data-toggle="popover" title="Reservante: <?= Html::encode($reservante) ?>" data-content="<?= nl2br(Html::encode($observacao)) ?>"><?= $hora ?>h</button>
                             <?php else: ?>
-                                <button type="button" class="btn btn-success"><?= $hora ?>h</button>
+                                <?= Html::a("{$hora}h", ['/reservas/adicionar'], ['class'=>'btn btn-success', 'data-method' => 'POST', 'data-params'=>['sala' => $id, 'data' => $data, 'hora' => $hora,]]) ?>
                             <?php endif; ?>
                         </div>
                     <?php endfor; ?>
