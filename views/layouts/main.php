@@ -40,7 +40,10 @@ AppAsset::register($this);
         $itensMenu[] = ['label' => 'Home', 'url' => ['/site/index']];
         $itensMenu[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
-        $itensMenu[] = ['label' => 'Reservas', 'url' => ['/reservas/index']];
+        $session = Yii::$app->session;
+        $data = $session->get('data');
+
+        $itensMenu[] = ['label' => 'Reservas', 'url' => ['/reservas/index', 'data' => $data]];
         if (Yii::$app->user->identity->administrador) {
             $itensMenu[] = ['label' => 'Usuários', 'url' => ['/usuarios/index']];
         }
