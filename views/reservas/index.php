@@ -87,6 +87,7 @@ $this->title = 'Reservas';
     calendario.on('dp.change', function(e){
         setarData(e.date);
         var formatado = moment(e.date).format('YYYY-MM-DD');
+        $('body').LoadingOverlay('show');
         window.location.replace('/reservas/' + formatado);
     });
 

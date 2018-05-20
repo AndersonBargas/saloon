@@ -30,6 +30,7 @@ class AppAsset extends AssetBundle
         'js/bootbox.min.js',
         'js/moment-with-locales.js',
         'js/bootstrap-datetimepicker.min.js',
+        'js/loadingoverlay.min.js',
         'js/site.js',
     ];
     public $depends = [
