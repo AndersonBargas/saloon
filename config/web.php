@@ -56,7 +56,6 @@ $config = [
 
                 'historico/<id:\d+>' => 'historico/ver',
                 'reservas/<id:\d+>'  => 'reservas/ver',
-                'salas/<id:\d+>'     => 'salas/ver',
                 'usuarios/<id:\d+>'  => 'usuarios/ver',
 
                 'historico/<action:(.*)>/<id:\d+>' => 'historico/<action>',
