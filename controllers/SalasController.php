@@ -40,7 +40,10 @@ class SalasController extends Controller
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->getSession()->setFlash('sucesso','Sala adicionada com sucesso.');
-            return $this->redirect(['reservas/index']);
+    
+            $session = Yii::$app->session;
+            $data = $session->get('data');
+            return $this->redirect(['reservas/index', 'data' => $data]);
         }
 
         return $this->render('create', [
@@ -60,8 +63,11 @@ class SalasController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('sucesso','Sala adicionada com sucesso.');
-            return $this->redirect(['reservas/index']);
+            Yii::$app->getSession()->setFlash('sucesso','Sala atualizada com sucesso.');
+            
+            $session = Yii::$app->session;
+            $data = $session->get('data');
+            return $this->redirect(['reservas/index', 'data' => $data]);
         }
 
         return $this->render('update', [
@@ -80,7 +86,9 @@ class SalasController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['reservas/index']);
+        $session = Yii::$app->session;
+        $data = $session->get('data');
+        return $this->redirect(['reservas/index', 'data' => $data]);
     }
 
     /**

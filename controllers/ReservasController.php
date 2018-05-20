@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Reservas;
-use app\models\ReservasSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -33,14 +32,13 @@ class ReservasController extends Controller
      * Lists all Reservas models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($data)
     {
-        $searchModel = new ReservasSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $session = Yii::$app->session;
+        $session->set('data', $data);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'data' => $data,
         ]);
     }
 
