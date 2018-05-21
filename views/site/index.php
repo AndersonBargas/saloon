@@ -18,34 +18,19 @@ $this->title = 'Saloon';
 
         <div class="row">
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Cadastro de usuários</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                <p>Além do cadastro de usuários, é possível selecionar se um usuário será administrador. Usuários administradores possuem acesso ao cadastro de usuários.</p>
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>Cadastro de salas</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+                <p>Mais que um cadastro de salas. É possível marcar se a sala possui sistema de som e projetor disponível.</p>
             </div>
             <div class="col-lg-4">
-                <h2>Heading</h2>
+                <h2>...e muito mais</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+                <p>Experimente agora e veja os demais recursos que o Sistema oferece.</p>
             </div>
         </div>
 
