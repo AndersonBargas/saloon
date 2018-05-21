@@ -11,7 +11,7 @@ $this->title = 'Saloon';
 
         <p class="lead">O Melhor Sistema para reserva de salas.</p>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Experimente agora</a></p>
+        <p><a class="btn btn-lg btn-success" href="/login">Experimente agora</a></p>
     </div>
 
     <div class="body-content">
