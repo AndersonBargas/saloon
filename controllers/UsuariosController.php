@@ -25,7 +25,7 @@ class UsuariosController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'allow' => Yii::$app->user->identity->administrador,
+                        'allow' => true,//Yii::$app->user->identity->administrador,
                         'roles' => ['@'],
                     ],
                 ],

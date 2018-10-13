@@ -14,11 +14,11 @@ use yii\db\Expression;
  * @property string $nome
  * @property string $email
  * @property string $senha
- * @property bool $administrador
+ * @property string $idPerfil
  * @property string $criacao
  *
- * @property Historico[] $historicos
  * @property Reservas[] $reservas
+ * @property Perfis $perfil
  */
 class Usuarios extends ActiveRecord implements \yii\web\IdentityInterface
 {
@@ -40,16 +40,17 @@ class Usuarios extends ActiveRecord implements \yii\web\IdentityInterface
     {
         $fields = [];
         if ($this->editando) {
-            $fields[] = [['nome', 'email'], 'required'];
+            $fields[] = [['nome', 'email', 'idPerfil'], 'required'];
         } else {
             $fields[] = [['nome', 'email', 'senha'], 'required'];
             $fields[] = [['senha'], 'string', 'min' => 4];
         }
-        $fields[] = [['administrador'], 'boolean'];
+        $fields[] = [['idPerfil'], 'integer'];
         $fields[] = [['criacao'], 'safe'];
         $fields[] = [['nome', 'email', 'senha'], 'string', 'max' => 120];
         $fields[] = [['email'], 'email'];
         $fields[] = [['email'], 'unique'];
+        $fields[] = [['idPerfil'], 'exist', 'skipOnError' => true, 'targetClass' => Perfis::className(), 'targetAttribute' => ['idPerfil' => 'id']];
         return $fields;
     }
 
@@ -63,7 +64,7 @@ class Usuarios extends ActiveRecord implements \yii\web\IdentityInterface
             'nome' => 'Nome',
             'email' => 'E-mail',
             'senha' => 'Senha',
-            'administrador' => 'Administrador',
+            'idPerfil' => 'Perfil',
             'criacao' => 'Data Criação',
         ];
     }
@@ -176,9 +177,9 @@ class Usuarios extends ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getReservas()
+    public function getPerfil()
     {
-        return $this->hasMany(Reservas::className(), ['usuario' => 'id']);
+        return $this->hasOne(Perfis::className(), ['id' => 'idPerfil']);
     }
 
     /**

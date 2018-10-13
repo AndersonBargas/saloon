@@ -20,7 +20,7 @@ class UsuariosSearch extends Usuarios
         return [
             [['id'], 'integer'],
             [['nome', 'email', 'senha', 'criacao'], 'safe'],
-            [['administrador'], 'boolean'],
+            //[['administrador'], 'boolean'],
         ];
     }
 
@@ -61,7 +61,7 @@ class UsuariosSearch extends Usuarios
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'administrador' => $this->administrador,
+            //'administrador' => $this->administrador,
             'criacao' => $this->criacao,
         ]);
 

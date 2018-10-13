@@ -45,13 +45,14 @@ AppAsset::register($this);
 
         
 
-        if (Yii::$app->user->identity->administrador) {
+        //if (Yii::$app->user->identity->administrador) {
             $itensMenu[] = ['label' => 'Administração',
                             'items' => [
+                                ['label' => 'Perfis', 'url' => ['/perfis/index']],
                                 ['label' => 'Usuários', 'url' => ['/usuarios/index']]
                             ],
             ];
-        }
+        //}
         $itensMenu[] = ['label' => 'Logout (' . Yii::$app->user->identity->getPrimeiroNome() . ')', 'url' => ['/site/logout']];
     }
 

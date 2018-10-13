@@ -34,7 +34,7 @@ $this->title = 'Usuários';
             'id',
             'nome',
             'email:email',
-            'administrador:boolean',
+            //'administrador:boolean',
             'criacao:datetime',
 
             [

@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Perfis;
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -24,7 +26,12 @@ use yii\widgets\ActiveForm;
 
     <div class="alert alert-info" role="alert">Apenas <strong>administradores</strong> possuem acesso ao cadastro de <strong>usuários</strong>.</div>
 
-    <?= $form->field($model, 'administrador')->checkbox(['class'=>'js-switch']) ?>
+    <?= $form->field($model, 'idPerfil')->dropDownList(Perfis::find()
+        ->select(['nome'])
+        ->indexBy('id')
+        ->column(), ['prompt' => 'Selecione']) ?>
+
+    <?php //$form->field($model, 'administrador')->checkbox(['class'=>'js-switch']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
