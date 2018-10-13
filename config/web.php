@@ -32,6 +32,7 @@ $config = [
             'class' => 'yii\swiftmailer\Mailer',
             'useFileTransport' => true,
         ],
+        'metadata' => ['class'=>'app\components\Metadata'],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
