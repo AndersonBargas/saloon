@@ -50,9 +50,6 @@ $config = [
                 'login'  => 'site/login',
                 'logout' => 'site/logout',
 
-                'historico' => 'historico/index',
-                'usuarios'  => 'usuarios/index',
-
                 'historico/<id:\d+>' => 'historico/ver',
                 'usuarios/<id:\d+>'  => 'usuarios/ver',
 
