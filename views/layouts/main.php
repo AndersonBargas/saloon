@@ -43,8 +43,14 @@ AppAsset::register($this);
         $session = Yii::$app->session;
         $data = $session->get('data');
 
+        
+
         if (Yii::$app->user->identity->administrador) {
-            $itensMenu[] = ['label' => 'Usuários', 'url' => ['/usuarios/index']];
+            $itensMenu[] = ['label' => 'Administração',
+                            'items' => [
+                                ['label' => 'Usuários', 'url' => ['/usuarios/index']]
+                            ],
+            ];
         }
         $itensMenu[] = ['label' => 'Logout (' . Yii::$app->user->identity->getPrimeiroNome() . ')', 'url' => ['/site/logout']];
     }
