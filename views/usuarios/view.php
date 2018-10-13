@@ -29,7 +29,12 @@ $this->title = Html::encode($model->nome . ' (#' . $model->id .  ')');
             'id',
             'nome',
             'email:email',
-            'administrador:boolean',
+            [
+                'label' => 'Perfil',
+                'value' => $model->perfil->nome,            
+                //'contentOptions' => ['class' => 'bg-red'],
+                //'captionOptions' => ['tooltip' => 'Tooltip'],
+            ],
             'criacao:datetime',
         ],
     ]) ?>
