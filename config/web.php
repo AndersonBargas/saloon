@@ -51,10 +51,12 @@ $config = [
                 'logout' => 'site/logout',
 
                 'historico/<id:\d+>' => 'historico/ver',
+                'perfis/<id:\d+>'    => 'perfis/ver',
                 'usuarios/<id:\d+>'  => 'usuarios/ver',
 
                 'historico/<action:(.*)>/<id:\d+>' => 'historico/<action>',
-                'usuarios/<action:(.*)>/<id:\d+>' => 'usuarios/<action>',
+                'perfis/<action:(.*)>/<id:\d+>'    => 'perfis/<action>',
+                'usuarios/<action:(.*)>/<id:\d+>'  => 'usuarios/<action>',
 
                 '<controller:(.*)/<action:(.*)>' => '<controller>/<action>',
             ],
