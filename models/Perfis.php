@@ -44,7 +44,7 @@ class Perfis extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nome' => 'Nome',
-            'criacao' => 'Criacao',
+            'criacao' => 'Data Criação',
         ];
     }
 
