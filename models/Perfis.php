@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "perfis".
@@ -45,6 +48,19 @@ class Perfis extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nome' => 'Nome',
             'criacao' => 'Data Criação',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['criacao'],
+                ],
+                'value' => new Expression('NOW()'),
+            ],
         ];
     }
 
