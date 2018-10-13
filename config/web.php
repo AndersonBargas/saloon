@@ -54,19 +54,12 @@ $config = [
                 'usuarios'  => 'usuarios/index',
 
                 'historico/<id:\d+>' => 'historico/ver',
-                'reservas/<id:\d+>'  => 'reservas/ver',
                 'usuarios/<id:\d+>'  => 'usuarios/ver',
 
                 'historico/<action:(.*)>/<id:\d+>' => 'historico/<action>',
-                'reservas/<action:(.*)>/<id:\d+>'  => 'reservas/<action>',
-                'salas/<action:(.*)>/<id:\d+>'     => 'salas/<action>',
                 'usuarios/<action:(.*)>/<id:\d+>' => 'usuarios/<action>',
 
                 '<controller:(.*)/<action:(.*)>' => '<controller>/<action>',
-
-                [
-                    'class' => 'app\components\ReservasUrlRule',
-                ],
             ],
         ],
     ],

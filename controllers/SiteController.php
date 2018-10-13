@@ -63,7 +63,7 @@ class SiteController extends Controller
         } else {
             $session = Yii::$app->session;
             $data = $session->get('data');
-            return $this->redirect(['reservas/index', 'data' => $data]);
+            return $this->redirect(['usuarios/index', 'data' => $data]);
         }
     }
 
@@ -82,7 +82,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             if( $model->login() ){
                 Historico::gerarHistorico('Usuário se logou no sistema.', false);
-                return $this->redirect(['reservas/index', 'data' => date("Y-m-d")]);
+                return $this->redirect(['usuarios/index', 'data' => date("Y-m-d")]);
             }else{
                 Yii::$app->getSession()->setFlash('erro','E-mail ou senha incorreto(s).');
             }
