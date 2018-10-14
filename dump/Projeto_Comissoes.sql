@@ -5,19 +5,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema saloon
+-- Schema comissao
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema saloon
+-- Schema comissao
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `saloon` DEFAULT CHARACTER SET utf8 ;
-USE `saloon` ;
+CREATE SCHEMA IF NOT EXISTS `comissao` DEFAULT CHARACTER SET utf8 ;
+USE `comissao` ;
 
 -- -----------------------------------------------------
--- Table `saloon`.`cliente`
+-- Table `comissao`.`cliente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `saloon`.`cliente` (
+CREATE TABLE IF NOT EXISTS `comissao`.`cliente` (
   `idCliente` INT NOT NULL COMMENT 'Chave primaria da tabela',
   `nomeCliente` VARCHAR(45) NOT NULL COMMENT 'Nome do cliente',
   `cpfCliente` INT NOT NULL COMMENT 'CPF do cliente',
@@ -27,9 +27,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `saloon`.`tabelaComissao`
+-- Table `comissao`.`tabelaComissao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `saloon`.`tabelaComissao` (
+CREATE TABLE IF NOT EXISTS `comissao`.`tabelaComissao` (
   `idTabelaComissao` INT NOT NULL COMMENT 'Chave primaria da tabela',
   `descricaoTabelaComissao` VARCHAR(45) NOT NULL COMMENT 'Descricao da Tabela de Comissao',
   PRIMARY KEY (`idTabelaComissao`))
@@ -37,9 +37,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `saloon`.`consorcioCliente`
+-- Table `comissao`.`consorcioCliente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `saloon`.`consorcioCliente` (
+CREATE TABLE IF NOT EXISTS `comissao`.`consorcioCliente` (
   `idConsorcioCliente` INT NOT NULL COMMENT 'Chave primaria da tabela',
   `codigoGrupoConsorcio` VARCHAR(10) NOT NULL COMMENT 'Grupo do Consorcio',
   `codigoCotaConsorcio` VARCHAR(10) NOT NULL COMMENT 'Cota do Consorcio',
@@ -51,21 +51,21 @@ CREATE TABLE IF NOT EXISTS `saloon`.`consorcioCliente` (
   INDEX `fk_consorcioCliente_cliente_idx` (`cliente_idCliente` ASC),
   CONSTRAINT `fk_consorcioCliente_tabelaComissao`
     FOREIGN KEY (`tabelaComissao_idTabelaComissao`)
-    REFERENCES `saloon`.`tabelaComissao` (`idTabelaComissao`)
+    REFERENCES `comissao`.`tabelaComissao` (`idTabelaComissao`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_consorcioCliente_cliente`
     FOREIGN KEY (`cliente_idCliente`)
-    REFERENCES `saloon`.`cliente` (`idCliente`)
+    REFERENCES `comissao`.`cliente` (`idCliente`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `saloon`.`funcao`
+-- Table `comissao`.`funcao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `saloon`.`funcao` (
+CREATE TABLE IF NOT EXISTS `comissao`.`funcao` (
   `idFuncao` INT NOT NULL COMMENT 'Chave primaria',
   `descricaoFuncao` VARCHAR(45) NOT NULL COMMENT 'Descricao da funcao',
   `ativoFuncao` CHAR(1) NOT NULL DEFAULT 'S' COMMENT 'Ativo/Inativo',
@@ -74,9 +74,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `saloon`.`tabelaComissaoFuncao`
+-- Table `comissao`.`tabelaComissaoFuncao`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `saloon`.`tabelaComissaoFuncao` (
+CREATE TABLE IF NOT EXISTS `comissao`.`tabelaComissaoFuncao` (
   `tabelaComissao_idTabelaComissao` INT NOT NULL,
   `funcao_idFuncao` INT NOT NULL,
   `ordemComissao` INT NOT NULL DEFAULT 1 COMMENT 'Ordem de prioridade',
@@ -86,12 +86,12 @@ CREATE TABLE IF NOT EXISTS `saloon`.`tabelaComissaoFuncao` (
   INDEX `fk_tabelaComissaoFuncao_funcao1_idx` (`funcao_idFuncao` ASC),
   CONSTRAINT `fk_tabelaComissaoFuncao_tabelaComissao1`
     FOREIGN KEY (`tabelaComissao_idTabelaComissao`)
-    REFERENCES `saloon`.`tabelaComissao` (`idTabelaComissao`)
+    REFERENCES `comissao`.`tabelaComissao` (`idTabelaComissao`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_tabelaComissaoFuncao_funcao1`
     FOREIGN KEY (`funcao_idFuncao`)
-    REFERENCES `saloon`.`funcao` (`idFuncao`)
+    REFERENCES `comissao`.`funcao` (`idFuncao`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
