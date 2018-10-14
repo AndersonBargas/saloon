@@ -33,6 +33,11 @@ class Usuarios extends ActiveRecord implements \yii\web\IdentityInterface
         return 'usuarios';
     }
 
+    public static function getDb()
+    {
+        return Yii::$app->dbBase;
+    }
+
     /**
      * {@inheritdoc}
      */
