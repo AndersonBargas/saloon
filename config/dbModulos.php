@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=' . getenv('DB_HOST') . ';dbname=' . getenv('DB_NAME'),
-    'username' => getenv('DB_USERNAME'),
-    'password' => getenv('DB_PASSWORD'),
+    'dsn' => 'mysql:host=' . '127.0.0.1:3306' . ';dbname=' . 'comissao',
+    'username' => 'root',
+    'password' => '',
     'charset' => 'utf8',
     'on afterOpen' => function($event) { 
         $event->sender->createCommand("SET time_zone='-03:00';")->execute(); 
