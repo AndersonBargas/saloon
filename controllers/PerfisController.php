@@ -67,7 +67,7 @@ class PerfisController extends Controller
         $model = new Perfis();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['ver', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -86,12 +86,29 @@ class PerfisController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($post = Yii::$app->request->post()) {
+            $permissoes = [];
+            foreach ($post['controladores'] as $info) {
+                list($controlador, $acao) = explode('*', $info);
+                $permissoes[] = [
+                    'idPerfil' => $id,
+                    'controlador' => $controlador,
+                    'acao' => $acao,
+                ];
+            }
+            $post['Perfis']['permissoes'] = $permissoes;
+            unset($post['controladores']);
+
+            if ($model->loadAll($post) && $model->saveAll()) {
+                return $this->redirect(['ver', 'id' => $model->id]);
+            }
         }
+
+        $controladores = $this->buscarControladoresComAcoes();
 
         return $this->render('update', [
             'model' => $model,
+            'controladores' => $controladores,
         ]);
     }
 
@@ -123,5 +140,25 @@ class PerfisController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    private function buscarControladoresComAcoes()
+    {
+        $controladores = Yii::$app->metadata->getControllers();
+
+        $items = [];
+        foreach (array_values($controladores) as $controlador) {
+
+            $acoes = Yii::$app->metadata->getActions($controlador);
+            $filhos = [];
+            foreach ($acoes as $acao) {
+                $filhos[] = ['title' => $acao, 'key' => "{$controlador}*{$acao}"];
+            }
+            $items[] = ['title'    => mb_substr($controlador, 0, -10),
+                        'children' => $filhos,
+                        'folder' => true,
+            ];
+        }
+        return $items;
     }
 }
