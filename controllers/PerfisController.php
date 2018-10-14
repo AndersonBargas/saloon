@@ -89,6 +89,10 @@ class PerfisController extends Controller
         if ($post = Yii::$app->request->post()) {
             $permissoes = [];
             foreach ($post['controladores'] as $info) {
+                if (strpos($info, '*') === false) {
+                    continue;
+                }
+
                 list($controlador, $acao) = explode('*', $info);
                 $permissoes[] = [
                     'idPerfil' => $id,
@@ -99,12 +103,16 @@ class PerfisController extends Controller
             $post['Perfis']['permissoes'] = $permissoes;
             unset($post['controladores']);
 
+            foreach ($model->getPermissoes()->all() as $existente) {
+                $existente->delete();
+            }
+
             if ($model->loadAll($post) && $model->saveAll()) {
                 return $this->redirect(['ver', 'id' => $model->id]);
             }
         }
 
-        $controladores = $this->buscarControladoresComAcoes();
+        $controladores = $this->buscarControladoresComAcoes($model->getPermissoes());
 
         return $this->render('update', [
             'model' => $model,
@@ -142,7 +150,7 @@ class PerfisController extends Controller
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    private function buscarControladoresComAcoes()
+    private function buscarControladoresComAcoes($permissoes)
     {
         $controladores = Yii::$app->metadata->getControllers();
 
@@ -151,9 +159,25 @@ class PerfisController extends Controller
 
             $acoes = Yii::$app->metadata->getActions($controlador);
             $filhos = [];
+
             foreach ($acoes as $acao) {
-                $filhos[] = ['title' => $acao, 'key' => "{$controlador}*{$acao}"];
+                $filho = [
+                    'title' => $acao,
+                    'key' => "{$controlador}*{$acao}",
+                ];
+
+                $existePermissao = $permissoes->where([
+                    'controlador' => $controlador,
+                    'acao' => $acao,
+                    ])->exists();
+
+                if ($existePermissao === true) {
+                    $filho['selected'] = true;
+                }
+
+                $filhos[] = $filho;
             }
+
             $items[] = ['title'    => mb_substr($controlador, 0, -10),
                         'children' => $filhos,
                         'folder' => true,
