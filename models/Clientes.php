@@ -52,9 +52,9 @@ class Clientes extends \yii\db\ActiveRecord
     {
         return [
             'idCliente' => 'Id Cliente',
-            'nomeCliente' => 'Nome Cliente',
-            'cpfCliente' => 'Cpf Cliente',
-            'rgCliente' => 'Rg Cliente',
+            'nomeCliente' => 'Nome',
+            'cpfCliente' => 'CPF',
+            'rgCliente' => 'RG',
         ];
     }
 

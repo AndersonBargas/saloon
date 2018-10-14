@@ -56,10 +56,12 @@ $config = [
                 'historico/<id:\d+>' => 'historico/ver',
                 'perfis/<id:\d+>'    => 'perfis/ver',
                 'usuarios/<id:\d+>'  => 'usuarios/ver',
+                'clientes/<id:\d+>'  => 'clientes/ver',
 
                 'historico/<action:(.*)>/<id:\d+>' => 'historico/<action>',
                 'perfis/<action:(.*)>/<id:\d+>'    => 'perfis/<action>',
                 'usuarios/<action:(.*)>/<id:\d+>'  => 'usuarios/<action>',
+                'clientes/<action:(.*)>/<id:\d+>'  => 'clientes/<action>',
 
                 '<controller:(.*)/<action:(.*)>' => '<controller>/<action>',
             ],
