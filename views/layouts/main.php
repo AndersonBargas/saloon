@@ -63,7 +63,7 @@ AppAsset::register($this);
                             'items' => [
                                             ['label' => 'Cadastro', 
                                              'items' => [
-                                                            ['label' => 'Cliente', 'url' => ['/cliente/index']],
+                                                            ['label' => 'Cliente', 'url' => ['/clientes/index']],
                                                             ['label' => 'Função',  'url' => ['/site/index']],
                                                             ['label' => 'Tabela',  'url' => ['/site/index']]
                                                         ],
