@@ -48,10 +48,39 @@ AppAsset::register($this);
         //if (Yii::$app->user->identity->administrador) {
             $itensMenu[] = ['label' => 'Administração',
                             'items' => [
-                                ['label' => 'Perfis', 'url' => ['/perfis/index']],
-                                ['label' => 'Usuários', 'url' => ['/usuarios/index']]
-                            ],
-            ];
+                                            ['label' => 'Cadastro', 
+                                             'items' => [
+                                                            ['label' => 'Acesso',  'url' => ['/site/index']],
+                                                            ['label' => 'Empresa', 'url' => ['/site/index']],
+                                                            ['label' => 'Perfil',  'url' => ['/site/index']],
+                                                            ['label' => 'Usuário', 'url' => ['/usuarios/index']]
+                                                        ],
+                                            ],
+                                        ]
+                            ];
+
+            $itensMenu[] = ['label' => 'Comissões',
+                            'items' => [
+                                            ['label' => 'Cadastro', 
+                                             'items' => [
+                                                            ['label' => 'Cliente', 'url' => ['/cliente/index']],
+                                                            ['label' => 'Função',  'url' => ['/site/index']],
+                                                            ['label' => 'Tabela',  'url' => ['/site/index']]
+                                                        ],
+                                            ],
+
+                                            ['label' => 'Relatório', 
+                                             'items' => [
+                                                            ['label' => 'Importação', 'url' => ['/site/index']],
+                                                            ['label' => 'Imprimir',   'url' => ['/site/index']]
+                                                        ],
+                                            ],
+
+                                            ['label' => 'Dashboard', 'url' => ['/site/index'], 
+                                             'items' => [],
+                                            ],
+                                        ]
+                            ];
         //}
         $itensMenu[] = ['label' => 'Logout (' . Yii::$app->user->identity->getPrimeiroNome() . ')', 'url' => ['/site/logout']];
     }
