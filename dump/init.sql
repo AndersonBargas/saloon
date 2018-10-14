@@ -13,6 +13,7 @@
 
 
 -- Copiando estrutura do banco de dados para saloon
+DROP DATABASE IF EXISTS `saloon`;
 CREATE DATABASE IF NOT EXISTS `saloon` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `saloon`;
 
@@ -57,8 +58,9 @@ INSERT INTO `perfis` (`id`, `nome`, `criacao`) VALUES
 DROP TABLE IF EXISTS `permissoes`;
 CREATE TABLE IF NOT EXISTS `permissoes` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `idPerfil` int(10) unsigned DEFAULT NULL,
-  `rota` varchar(150) DEFAULT NULL,
+  `idPerfil` int(10) unsigned NOT NULL,
+  `controlador` varchar(150) NOT NULL,
+  `acao` varchar(150) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `permissoes_perfis_fk` (`idPerfil`),
   CONSTRAINT `permissoes_perfis_fk` FOREIGN KEY (`idPerfil`) REFERENCES `perfis` (`id`) ON DELETE CASCADE

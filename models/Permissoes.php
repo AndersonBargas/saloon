@@ -9,7 +9,8 @@ use Yii;
  *
  * @property string $id
  * @property string $idPerfil
- * @property string $rota
+ * @property string $controlador
+ * @property string $acao
  *
  * @property Perfis $perfil
  */
@@ -23,9 +24,12 @@ class Permissoes extends \yii\db\ActiveRecord
         return 'permissoes';
     }
 
+    /**
+     * @return \yii\db\Connection the database connection used by this AR class.
+     */
     public static function getDb()
     {
-        return Yii::$app->dbBase;
+        return Yii::$app->get('dbBase');
     }
 
     /**
@@ -34,8 +38,9 @@ class Permissoes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['idPerfil', 'controlador', 'acao'], 'required'],
             [['idPerfil'], 'integer'],
-            [['rota'], 'string', 'max' => 150],
+            [['controlador', 'acao'], 'string', 'max' => 150],
             [['idPerfil'], 'exist', 'skipOnError' => true, 'targetClass' => Perfis::className(), 'targetAttribute' => ['idPerfil' => 'id']],
         ];
     }
@@ -48,7 +53,8 @@ class Permissoes extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'idPerfil' => 'Id Perfil',
-            'rota' => 'Rota',
+            'controlador' => 'Controlador',
+            'acao' => 'Acao',
         ];
     }
 
