@@ -87,21 +87,26 @@ class PerfisController extends Controller
         $model = $this->findModel($id);
 
         if ($post = Yii::$app->request->post()) {
-            $permissoes = [];
-            foreach ($post['controladores'] as $info) {
-                if (strpos($info, '*') === false) {
-                    continue;
+
+            if (array_key_exists('controladores', $post) === true) {
+                $permissoes = [];
+                foreach ($post['controladores'] as $info) {
+                    if (strpos($info, '*') === false) {
+                        continue;
+                    }
+    
+                    list($controlador, $acao) = explode('*', $info);
+                    $permissoes[] = [
+                        'idPerfil' => $id,
+                        'controlador' => $controlador,
+                        'acao' => $acao,
+                    ];
                 }
 
-                list($controlador, $acao) = explode('*', $info);
-                $permissoes[] = [
-                    'idPerfil' => $id,
-                    'controlador' => $controlador,
-                    'acao' => $acao,
-                ];
+                $post['Perfis']['permissoes'] = $permissoes;
+                unset($post['controladores']);
+
             }
-            $post['Perfis']['permissoes'] = $permissoes;
-            unset($post['controladores']);
 
             foreach ($model->getPermissoes()->all() as $existente) {
                 $existente->delete();
