@@ -27,6 +27,11 @@ class Perfis extends \yii\db\ActiveRecord
         return 'perfis';
     }
 
+    public static function getDb()
+    {
+        return Yii::$app->dbBase;
+    }
+
     /**
      * {@inheritdoc}
      */

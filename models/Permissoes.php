@@ -23,6 +23,11 @@ class Permissoes extends \yii\db\ActiveRecord
         return 'permissoes';
     }
 
+    public static function getDb()
+    {
+        return Yii::$app->dbBase;
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -30,6 +30,11 @@ class Historico extends \yii\db\ActiveRecord
         return 'historico';
     }
 
+    public static function getDb()
+    {
+        return Yii::$app->dbBase;
+    }
+
     /**
      * {@inheritdoc}
      */
