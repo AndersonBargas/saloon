@@ -3,6 +3,7 @@
 use yii\data\ArrayDataProvider;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\web\View;
 use yii\widgets\ActiveForm;
 
 
@@ -36,6 +37,13 @@ use yii\widgets\ActiveForm;
     <div class="form-group">
     <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
+
+    <?php
+    $this->registerJs(
+        '$("#tree").fancytree("getTree").generateFormElements("controladores[]", false, {"stopOnParents": false});',
+        View::POS_READY,
+        'formulario-tree-inicial');
+    ?>
 
     <?php ActiveForm::end(); ?>
 
