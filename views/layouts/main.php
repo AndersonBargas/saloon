@@ -37,7 +37,7 @@ AppAsset::register($this);
 
     $itensMenu = [];
     if (Yii::$app->user->isGuest) {
-        $itensMenu[] = ['label' => 'Home', 'url' => ['/site/index']];
+        //$itensMenu[] = ['label' => 'Home', 'url' => ['/site/index']];
         $itensMenu[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $session = Yii::$app->session;
