@@ -179,8 +179,12 @@ class PerfisController extends Controller
             foreach ($acoes as $acao) {
 
                 $controladorSemSufixo = mb_substr($controlador, 0, -10);
+                $titulo = $acao;
+                if ($acao === 'Index') {
+                    $titulo = 'Principal';
+                }
                 $filho = [
-                    'title' => $acao,
+                    'title' => $titulo,
                     'key' => "{$controladorSemSufixo}*{$acao}",
                 ];
 
