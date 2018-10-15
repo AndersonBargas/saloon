@@ -23,6 +23,10 @@ class ControleDeAcesso extends BaseObject
         return false;
     }
 
-
+    public static function acessoNaoPermitido($rule, $action)
+    {
+        Yii::$app->getSession()->setFlash('aviso','Aceso não permitido.');
+        Yii::$app->user->loginRequired();
+    }
 
 }
