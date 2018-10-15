@@ -177,13 +177,15 @@ class PerfisController extends Controller
             $filhos = [];
 
             foreach ($acoes as $acao) {
+
+                $controladorSemSufixo = mb_substr($controlador, 0, -10);
                 $filho = [
                     'title' => $acao,
-                    'key' => "{$controlador}*{$acao}",
+                    'key' => "{$controladorSemSufixo}*{$acao}",
                 ];
 
                 $existePermissao = $permissoes->where([
-                    'controlador' => $controlador,
+                    'controlador' => $controladorSemSufixo,
                     'acao' => $acao,
                     ])->exists();
 
@@ -194,7 +196,7 @@ class PerfisController extends Controller
                 $filhos[] = $filho;
             }
 
-            $items[] = ['title'    => mb_substr($controlador, 0, -10),
+            $items[] = ['title'    => $controladorSemSufixo,
                         'children' => $filhos,
                         'folder' => true,
             ];
