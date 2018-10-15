@@ -3,10 +3,12 @@
 namespace app\controllers;
 
 use Yii;
+use app\components\ControleDeAcesso;
 use app\models\Perfis;
 use app\models\PerfisSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 
 /**
@@ -20,6 +22,15 @@ class PerfisController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => ControleDeAcesso::verificar(),
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

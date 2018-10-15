@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\components\ControleDeAcesso;
 use app\models\Usuarios;
 use app\models\UsuariosSearch;
 use yii\web\Controller;
@@ -25,7 +26,7 @@ class UsuariosController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'allow' => true,//Yii::$app->user->identity->administrador,
+                        'allow' => ControleDeAcesso::verificar(),
                         'roles' => ['@'],
                     ],
                 ],

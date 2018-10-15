@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use app\components\ControleDeAcesso;
 use app\models\Historico;
 use app\models\HistoricoSearch;
 use yii\web\Controller;
@@ -25,7 +26,7 @@ class HistoricoController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'allow' => true, //Yii::$app->user->identity->administrador,
+                        'allow' => ControleDeAcesso::verificar(),
                         'roles' => ['@'],
                     ],
                 ],
