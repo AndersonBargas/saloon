@@ -13,6 +13,7 @@ $this->title = Html::encode($model->nome . ' (#' . $model->id .  ')');
 
     <?= $this->render('_form', [
         'model' => $model,
+        'controladores' => $controladores,
     ]) ?>
 
 </div>

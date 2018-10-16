@@ -25,7 +25,8 @@
         "codeception/base": "^2.2.3",
         "codeception/verify": "~0.3.1",
         "codeception/specify": "~0.4.3",
-        "yii2mod/yii2-tree": "*"
+        "yii2mod/yii2-tree": "*",
+        "mootensai/yii2-relation-trait": "dev-master"
     },
     "config": {
         "process-timeout": 1800,

@@ -67,7 +67,7 @@ class PerfisController extends Controller
         $model = new Perfis();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['ver', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -86,12 +86,42 @@ class PerfisController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($post = Yii::$app->request->post()) {
+
+            if (array_key_exists('controladores', $post) === true) {
+                $permissoes = [];
+                foreach ($post['controladores'] as $info) {
+                    if (strpos($info, '*') === false) {
+                        continue;
+                    }
+    
+                    list($controlador, $acao) = explode('*', $info);
+                    $permissoes[] = [
+                        'idPerfil' => $id,
+                        'controlador' => $controlador,
+                        'acao' => $acao,
+                    ];
+                }
+
+                $post['Perfis']['permissoes'] = $permissoes;
+                unset($post['controladores']);
+
+            }
+
+            foreach ($model->getPermissoes()->all() as $existente) {
+                $existente->delete();
+            }
+
+            if ($model->loadAll($post) && $model->saveAll()) {
+                return $this->redirect(['ver', 'id' => $model->id]);
+            }
         }
+
+        $controladores = $this->buscarControladoresComAcoes($model->getPermissoes());
 
         return $this->render('update', [
             'model' => $model,
+            'controladores' => $controladores,
         ]);
     }
 
@@ -123,5 +153,41 @@ class PerfisController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    private function buscarControladoresComAcoes($permissoes)
+    {
+        $controladores = Yii::$app->metadata->getControllers();
+
+        $items = [];
+        foreach (array_values($controladores) as $controlador) {
+
+            $acoes = Yii::$app->metadata->getActions($controlador);
+            $filhos = [];
+
+            foreach ($acoes as $acao) {
+                $filho = [
+                    'title' => $acao,
+                    'key' => "{$controlador}*{$acao}",
+                ];
+
+                $existePermissao = $permissoes->where([
+                    'controlador' => $controlador,
+                    'acao' => $acao,
+                    ])->exists();
+
+                if ($existePermissao === true) {
+                    $filho['selected'] = true;
+                }
+
+                $filhos[] = $filho;
+            }
+
+            $items[] = ['title'    => mb_substr($controlador, 0, -10),
+                        'children' => $filhos,
+                        'folder' => true,
+            ];
+        }
+        return $items;
     }
 }

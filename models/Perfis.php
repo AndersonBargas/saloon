@@ -19,6 +19,8 @@ use yii\db\Expression;
  */
 class Perfis extends \yii\db\ActiveRecord
 {
+    use \mootensai\relation\RelationTrait;
+
     /**
      * {@inheritdoc}
      */
@@ -80,8 +82,9 @@ class Perfis extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuarios()
+    /*public function getUsuarios()
     {
         return $this->hasMany(Usuarios::className(), ['idPerfil' => 'id']);
-    }
+    }*/
+
 }
