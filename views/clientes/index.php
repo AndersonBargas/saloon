@@ -16,21 +16,49 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Clientes', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Novo Cliente', ['adicionar'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+//            ['class' => 'yii\grid\SerialColumn'],
+//
+//            'idCliente',
+//            'nomeCliente',
+//            'cpfCliente',
+//            'rgCliente',
+//
+//            ['class' => 'yii\grid\ActionColumn'],
+                        ['class' => 'yii\grid\SerialColumn'],
 
-            'idCliente',
-            'nomeCliente',
-            'cpfCliente',
-            'rgCliente',
+            //'id',
+            'nome',
+            'criacao:datetime',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class'    => 'yii\grid\ActionColumn',
+                'template' => '{clientesVer} {clientesEditar} {clientesExcluir}',
+                'buttons'  => [
+                                'clientesVer' => function ($url, $model) {
+                                    $url = Url::to(['clientesVer/ver', 'idCliente' => $model->idCliente]);
+                                    return Html::a('<span class="fa fa-eye"></span>', $url, ['title' => 'Visualizar']);
+                                },
+                                'clientesEditar' => function ($url, $model) {
+                                    $url = Url::to(['clientesEditar/editar', 'idCliente' => $model->idCliente]);
+                                    return Html::a('<span class="fa fa-pencil-alt"></span>', $url, ['title' => 'Editar']);
+                                },
+                                'clientesExcluir' => function ($url, $model) {
+                                    $url = Url::to(['clientesExcluir/excluir', 'idCliente' => $model->idCliente]);
+                                    return Html::a('<span class="fa fa-trash-alt text-danger"></span>', $url, [
+                                        'title'        => 'Excluir',
+                                        'data-confirm' => 'Tem certeza que deseja excluir este cliente?',
+                                        'data-method'  => 'post',
+                                    ]);
+                                },
+                ],
+            ],
         ],
     ]); ?>
 </div>

@@ -12,8 +12,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'idCliente')->textInput() ?>
-
     <?= $form->field($model, 'nomeCliente')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'cpfCliente')->textInput() ?>
@@ -21,7 +19,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'rgCliente')->textInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Salvar', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Salvar' : 'Atualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?= Html::submitButton('Cancelar', ['class' => 'btn btn-success']) ?>
     </div>
 
