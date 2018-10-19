@@ -12,12 +12,6 @@ $this->title = 'Usuários';
 ?>
 <div class="usuarios-index">
 
-    <?php if (Yii::$app->session->hasFlash('sucesso')): ?>
-        <div class="alert alert-success" role="alert">
-            <strong>Excelente!</strong> <?= Yii::$app->session->getFlash('sucesso') ?>
-        </div>
-    <?php endif; ?>
-
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
 
