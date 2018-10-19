@@ -16,6 +16,5 @@ $this->title = 'Dashboard';
     <?php endif; ?>
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php Pjax::begin(); ?>
 
 </div>
