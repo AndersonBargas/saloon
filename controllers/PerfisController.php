@@ -124,7 +124,9 @@ class PerfisController extends Controller
             }
 
             if ($model->loadAll($post) && $model->saveAll()) {
-                return $this->redirect(['ver', 'id' => $model->id]);
+                Yii::$app->getSession()->setFlash('sucesso','Perfil atualizado com sucesso.');
+                return $this->redirect(['index']);
+                //return $this->redirect(['ver', 'id' => $model->id]);
             }
         }
 
