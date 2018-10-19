@@ -7,7 +7,9 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
+
 use app\assets\AppAsset;
+use app\widgets\Alert;
 
 AppAsset::register($this);
 ?>
@@ -64,6 +66,7 @@ AppAsset::register($this);
     ?>
 
     <div class="container">
+        <?= Alert::widget() ?>
         <?= $content ?>
     </div>
 </div>
