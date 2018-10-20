@@ -3,6 +3,7 @@
 use app\components\Metadata as MetaDataController;
 
 use yii\db\Migration;
+use \yii\db\Query;
 use Codeception\Test\Metadata;
 
 /**
@@ -37,6 +38,8 @@ class m181019_232102_create_permissoes_table extends Migration
             'CASCADE'
         );
 
+        $idPerfilAdministrador = (new Query())->from('perfis')->scalar($this->getDb());
+
         $metadata = new MetaDataController;
         $controladores = $metadata->getControllers();
         foreach (array_values($controladores) as $controlador) {
@@ -44,7 +47,7 @@ class m181019_232102_create_permissoes_table extends Migration
             $acoes = $metadata->getActions($controlador);
             foreach ($acoes as $acao) {
                 $this->insert('permissoes', [
-                    'idPerfil'    => 1,
+                    'idPerfil'    => $idPerfilAdministrador,
                     'controlador' => $controladorSemSufixo,
                     'acao'        => $acao,
                 ]);
@@ -57,8 +60,9 @@ class m181019_232102_create_permissoes_table extends Migration
      */
     public function safeDown()
     {
+        $idPerfilAdministrador = (new Query())->from('perfis')->scalar($this->getDb());
         $this->delete('permissoes', [
-            'idPerfil' => 1,
+            'idPerfil' => $idPerfilAdministrador,
         ]);
         $this->dropTable('permissoes');
     }

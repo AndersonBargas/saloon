@@ -3,6 +3,7 @@
 use yii\base\Security;
 use yii\db\Expression;
 use yii\db\Migration;
+use \yii\db\Query;
 
 /**
  * Handles the creation of table `usuarios`.
@@ -38,12 +39,13 @@ class m181019_230022_create_usuarios_table extends Migration
             'CASCADE'
         );
 
+        $idPerfilAdministrador = (new Query())->from('perfis')->scalar($this->getDb());
         $security = new Security;
         $this->insert('usuarios', [
             'nome'     => 'Admin da Silva',
             'email'    => 'admin@admin.com',
             'senha'    => $security->generatePasswordHash('admin'),
-            'idPerfil' => 1,
+            'idPerfil' => $idPerfilAdministrador,
             'criacao'  => new Expression('NOW()'),
         ]);
     }
