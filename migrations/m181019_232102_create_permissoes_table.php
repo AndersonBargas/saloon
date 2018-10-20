@@ -57,6 +57,9 @@ class m181019_232102_create_permissoes_table extends Migration
      */
     public function safeDown()
     {
+        $this->delete('permissoes', [
+            'idPerfil' => 1,
+        ]);
         $this->dropTable('permissoes');
     }
 }
