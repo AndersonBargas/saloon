@@ -37,10 +37,10 @@
     "scripts": {
         "post-install-cmd": [
             "yii\\composer\\Installer::postInstall",
-            "yii migrate/up --db=dbBase --interactive=0"
+            "php yii migrate/up --db=dbBase --interactive=0"
         ],
         "post-update-cmd": [
-            "yii migrate/up --db=dbBase --interactive=0"
+            "php yii migrate/up --db=dbBase --interactive=0"
         ],
         "post-create-project-cmd": [
             "yii\\composer\\Installer::postCreateProject",
