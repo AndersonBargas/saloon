@@ -21,7 +21,7 @@ class m181019_225344_create_perfis_table extends Migration
     {
         $this->createTable('perfis', [
             'id'      => $this->primaryKey(),
-            'nome'    => $this->string(50)->notNull(),
+            'nome'    => $this->string(50)->unique()->notNull(),
             'criacao' => $this->dateTime()->notNull(),
         ]);
 
