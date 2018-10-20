@@ -80,20 +80,12 @@ class Metadata extends BaseObject  {
     */
     public function getActions($controller, $module=null)
     {
-        if ($module!=null){
-            $path=join(DIRECTORY_SEPARATOR,array(Yii::app()->modulePath,$module,'controllers'));
-            $this->setModuleIncludePaths($module);
-        }else{
-            $path='..'.DIRECTORY_SEPARATOR.'controllers';
-        }        
+        $path=__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'controllers';
         
+        include_once($path.DIRECTORY_SEPARATOR.$controller.'.php');        
+        $reflection = new \ReflectionClass('app\\controllers\\' . $controller); 
+        $methods = $reflection->getMethods(); 
         
-            include_once($path.DIRECTORY_SEPARATOR.$controller.'.php');        
-            $reflection = new \ReflectionClass('app\\controllers\\' . $controller); 
-            $methods = $reflection->getMethods(); 
-        
-        //$cInstance=new $controller(null);
-        // var_dump($cInstance->actions());
         $actions=array();
         foreach($methods as $method)
         {           
@@ -144,18 +136,13 @@ class Metadata extends BaseObject  {
     /**
     * Scans controller directory & return array of MVC controllers
     * 
-    * @param mixed $module
-    * @param mixed $include_classes
     * @return array
     */
-    public function getControllers($module=null)
+    public function getControllers()
     {
 
-        if ($module!=null){
-            $path=join(DIRECTORY_SEPARATOR,array(Yii::app()->modulePath,$module,'controllers'));            
-        }else{
-            $path='..'.DIRECTORY_SEPARATOR.'controllers';
-        }                                
+        $path=__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'controllers';
+
         $controllers = array_filter(scandir($path),array($this,'isController'));
         foreach ($controllers as &$c)
         {            
