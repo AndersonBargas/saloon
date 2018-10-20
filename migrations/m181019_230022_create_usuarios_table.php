@@ -53,6 +53,9 @@ class m181019_230022_create_usuarios_table extends Migration
      */
     public function safeDown()
     {
+        $this->delete('usuarios', [
+            'email' => 'admin@admin.com',
+        ]);
         $this->dropTable('usuarios');
     }
 }
