@@ -36,6 +36,9 @@ class m181019_225344_create_perfis_table extends Migration
      */
     public function safeDown()
     {
+        $this->delete('perfis', [
+            'nome' => 'Administrador',
+        ]);
         $this->dropTable('perfis');
     }
 }
